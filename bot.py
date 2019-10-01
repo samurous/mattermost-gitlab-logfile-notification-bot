@@ -21,7 +21,7 @@ EVENTS = [
     {
         'name': 'Failed Login',
         'regex': re.compile(
-            r'(?P<date>\w+ \d{1,2}, \d{4} \d{2}:\d{2}): Failed Login: username=(?P<user>\w+) ip=(?P<ip>[\w.:]+)'
+            r'(?P<date>\w+ \d{1,2}, \d{4} \d{2}:\d{2}): Failed Login: (user)(name)?=(?P<user>\w+) ip=(?P<ip>[\w.:]+)'
         ),
         'message': 'Hi {user}, I logged a failed login on your gitlab account from ip={ip} at {date} :grimacing:',
         'channel': '@{user}'
