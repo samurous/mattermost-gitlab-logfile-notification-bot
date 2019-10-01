@@ -15,14 +15,16 @@ EVENTS = [
             r'(?P<date>\w+ \d{1,2}, \d{4} \d{2}:\d{2}): Successful Login: username=(?P<user>\w+) ip=(?P<ip>[\w.:]+) '
             r'method=(?P<type>[\w-]+)'
         ),
-        'message': 'Hi {user}, I logged a successful {type}-login on your gitlab account from ip={ip} at {date}'
+        'message': 'Hi {user}, I logged a successful {type}-login on your gitlab account from ip={ip} at {date}',
+        'channel': '@{user}'
     },
     {
         'name': 'Failed Login',
         'regex': re.compile(
             r'(?P<date>\w+ \d{1,2}, \d{4} \d{2}:\d{2}): Failed Login: username=(?P<user>\w+) ip=(?P<ip>[\w.:]+)'
         ),
-        'message': 'Hi {user}, I logged a failed login on your gitlab account from ip={ip} at {date} :grimacing:'
+        'message': 'Hi {user}, I logged a failed login on your gitlab account from ip={ip} at {date} :grimacing:',
+        'channel': '@{user}'
     }
 ]
 
@@ -58,7 +60,7 @@ def process_log_line(line):
         match = event['regex'].search(line)
         if match:
             match_dict = match.groupdict()
-            payload['channel'] = '@{user}'.format(**match_dict).lower()
+            payload['channel'] = event['channel'].format(**match_dict).lower()
             payload['text'] = event['message'].format(**match_dict)
             logging.info('Sent match: {}'.format(payload))
             requests.post(URL, json=payload)
