@@ -4,7 +4,7 @@ services:
    mattermost-log-bot:
      build:
       context: ./
-     restart: 'no'
+     restart: unless-stopped
      volumes:
         - ${PWD}/bot.py:/bot/bot.py
         - ${HOST_GITLAB_APPLICATION_LOG_FILE}:/bot/application.log:ro
