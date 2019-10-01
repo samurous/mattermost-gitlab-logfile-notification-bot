@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+   mattermost-log-bot:
+     build:
+      context: ./
+     restart: 'no'
+     volumes:
+        - ${PWD}/bot.py:/bot/bot.py
+        - ${HOST_GITLAB_APPLICATION_LOG_FILE}:/bot/application.log:ro
+     environment:
+        - BOT_URL=${BOT_URL}
