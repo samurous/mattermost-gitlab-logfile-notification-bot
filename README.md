@@ -5,7 +5,8 @@ This could be a notification to the user of successful or failed login events.
 
 # Config
 Copy [`.env.dist`](.env.dist) to `.env` and change the variables to your needs.
-Make sure the user you will run the bot can at least read the file at `HOST_GITLAB_APPLICATION_LOG_FILE`
+
+**Note:** Make sure the user you will run the bot can at least read the file at `HOST_GITLAB_APPLICATION_LOG_FILE`
  
 # Start
 Run the bot via docker-compose `docker-compose up -d`
